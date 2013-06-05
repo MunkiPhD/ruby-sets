@@ -23,7 +23,7 @@ class RubySet
 			hash[item] = nil
 		end
 
-		return hash.keys
+		hash.keys
 	end
 
 
@@ -44,6 +44,37 @@ class RubySet
 		end
 
 		hash.keys
+	end
+
+
+
+	#
+	# Returns an array of the common values between the current set and setB
+	#
+	def intersect(setB)
+		hash = Hash.new()
+		# create a hash and add all the items from the current set (set A)
+		@set.each do |item|
+			hash[item] = 0
+		end
+
+		# iterate over all the values in the passed in set (setB). If it exists in the hash, increment the counter
+		setB.each do |item|
+			if hash.has_key?(item)
+				hash[item] += 1
+			end
+		end
+
+		result = []
+		# iterate over teh hash, if the counter is greater than zero, that means we found a common value, so add the key to an array
+		hash.each { |key, value|
+			if value > 0
+				result << key
+			end	
+		}
+
+		# return the array of keys that represent the values in common between the passed in set and the current set
+		result
 	end
 
 

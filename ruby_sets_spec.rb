@@ -49,7 +49,7 @@ describe RubySet do
 
 	
 	context 'intersections' do
-		let(:setA) { RubySet.new[1, 2, 'green'] }
+		let(:setA) { RubySet.new([1, 2, 'green']) }
 		
 		it 'is disjoint if two sets have nothing in common' do
 			setB = [3, 4, 'red']
@@ -64,7 +64,7 @@ describe RubySet do
 		end
 
 		it 'intersect itself returns itself' do
-			setB = setA.set.copy
+			setB = setA.set.dup
 			result = setA.intersect(setB)
 			expect(result).to eq [1, 2, 'green']
 		end
