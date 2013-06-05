@@ -17,7 +17,6 @@ describe RubySet do
 		end
 
 		it 'creates the union between two arrays' do
-			#set2 = [3, 3, 4, 5]
 			expect(@setA.union(set2)).to eq [1, 2, 3, 4, 5]
 		end
 	end
@@ -49,6 +48,30 @@ describe RubySet do
 	end
 
 	
+	context 'intersections' do
+		let(:setA) { RubySet.new[1, 2, 'green'] }
+		
+		it 'is disjoint if two sets have nothing in common' do
+			setB = [3, 4, 'red']
+			result = setA.intersect(setB)
+			expect(result).to eq []
+		end
+
+		it 'contains the common values' do
+			setB = [1, 'green']
+			result = setA.intersect(setB)
+			expect(result).to eq [1, 'green']
+		end
+
+		it 'intersect itself returns itself' do
+			setB = setA.set.copy
+			result = setA.intersect(setB)
+			expect(result).to eq [1, 2, 'green']
+		end
+	end
+
+
+
 	context 'cartesian product' do
 		let(:setA) { RubySet.new([1, 2, 'green']) }
 		let(:setB) { ['red', 'white', 'green'] }
