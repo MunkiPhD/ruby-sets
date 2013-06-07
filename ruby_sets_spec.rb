@@ -19,6 +19,10 @@ describe RubySet do
 		it 'creates the union between two arrays' do
 			expect(@setA.union(set2)).to eq [1, 2, 3, 4, 5]
 		end
+
+		it 'gets the union of multiple arrays' do
+			expect(@setA.union( [2, 3, 4], [5, 6, 7], [2, 5, 8])).to eq [1, 2, 3, 4, 5, 6,  7, 8]
+		end
 	end
 
 	context 'complement' do
@@ -67,6 +71,13 @@ describe RubySet do
 			setB = setA.set.dup
 			result = setA.intersect(setB)
 			expect(result).to eq [1, 2, 'green']
+		end
+
+		it 'gets intersection of multiple arrays' do
+			setB = [3, 4, 5]
+			setC = ['green', 4]
+			result = setA.intersect(setB, setC)
+			expect(result).to eq ['green', 4]
 		end
 	end
 

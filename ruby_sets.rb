@@ -13,14 +13,16 @@ class RubySet
 	# 
 	# Returns an array of the union of the current set and the passed in set (unique values of the two)
 	#
-	def union(setB)
+	def union(*sets)
 		hash = Hash.new()
 		@set.each do |item|
 			hash[item] = nil
 		end
 
-		setB.each do |item|
-			hash[item] = nil
+		sets.each do |sub_set|
+			sub_set.each do |item|
+				hash[item] = nil
+			end
 		end
 
 		hash.keys
@@ -51,7 +53,7 @@ class RubySet
 	#
 	# Returns an array of the common values between the current set and setB
 	#
-	def intersect(setB)
+	def intersect(*sets)
 		hash = Hash.new()
 		# create a hash and add all the items from the current set (set A)
 		@set.each do |item|
@@ -59,9 +61,13 @@ class RubySet
 		end
 
 		# iterate over all the values in the passed in set (setB). If it exists in the hash, increment the counter
-		setB.each do |item|
-			if hash.has_key?(item)
-				hash[item] += 1
+		sets.each do |sub_set|
+			sub_set.each do |item|
+				if hash.has_key?(item)
+					hash[item] += 1
+				else
+					hash[item] = 0
+				end
 			end
 		end
 
