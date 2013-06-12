@@ -97,4 +97,4 @@ class RubySet
 
 		new_set
 	end
-end	
+end
